@@ -25,6 +25,8 @@ archives:
         - mongo-utils
         name_template: "mongo-utils_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
         wrap_in_directory: true
+        files:
+            - none*
     -
         id: test-utils
         builds:

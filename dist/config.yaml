@@ -1,0 +1,88 @@
+project_name: gomods
+release:
+  github:
+    owner: shparker1977
+    name: gomods
+  name_template: gomods-v{{.Version}}
+scoop:
+  name: gomods
+  commit_author:
+    name: goreleaserbot
+    email: goreleaser@carlosbecker.com
+builds:
+- id: mongo-utils
+  goos:
+  - darwin
+  goarch:
+  - amd64
+  goarm:
+  - "6"
+  targets:
+  - darwin_amd64
+  dir: mongo-utils
+  main: main.go
+  ldflags:
+  - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
+    -X main.builtBy=goreleaser
+  binary: mongo-utils
+  lang: go
+- id: test-utils
+  goos:
+  - darwin
+  goarch:
+  - amd64
+  goarm:
+  - "6"
+  targets:
+  - darwin_amd64
+  dir: test-utils
+  main: main.go
+  ldflags:
+  - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
+    -X main.builtBy=goreleaser
+  binary: test-utils
+  lang: go
+archives:
+- id: mongo-utils
+  builds:
+  - mongo-utils
+  name_template: mongo-utils_{{ .Version }}_{{ .Os }}_{{ .Arch }}
+  format: tar.gz
+  wrap_in_directory: "true"
+  files:
+  - licence*
+  - LICENCE*
+  - license*
+  - LICENSE*
+  - readme*
+  - README*
+  - changelog*
+  - CHANGELOG*
+- id: test-utils
+  builds:
+  - test-utils
+  name_template: test-utils_{{ .Version }}_{{ .Os }}_{{ .Arch }}
+  format: tar.gz
+  files:
+  - licence*
+  - LICENCE*
+  - license*
+  - LICENSE*
+  - readme*
+  - README*
+  - changelog*
+  - CHANGELOG*
+snapshot:
+  name_template: '{{ .Tag }}-SNAPSHOT-{{ .ShortCommit }}'
+checksum:
+  name_template: '{{ .ProjectName }}_{{ .Version }}_checksums.txt'
+  algorithm: sha256
+dist: dist
+env_files:
+  github_token: ~/.config/goreleaser/github_token
+  gitlab_token: ~/.config/goreleaser/gitlab_token
+  gitea_token: ~/.config/goreleaser/gitea_token
+github_urls:
+  download: https://github.com
+gitlab_urls:
+  download: https://gitlab.com
