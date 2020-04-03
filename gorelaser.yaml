@@ -1,0 +1,32 @@
+---
+builds:
+    -
+        id: "mongo-utils"
+        dir: mongo-utils
+        main: main.go
+        binary: mongo-utils
+        goarch:
+            - amd64
+        goos:
+            - darwin
+    -
+        id: "test-utils"
+        dir: test-utils
+        main: main.go
+        binary: test-utils
+        goarch:
+            - amd64
+        goos:
+            - darwin
+archives:
+    -
+        id: mongo-utils
+        builds:
+        - mongo-utils
+        name_template: "mongo-utils_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+        wrap_in_directory: true
+    -
+        id: test-utils
+        builds:
+        - test-utils
+        name_template: "test-utils_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
