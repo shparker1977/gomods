@@ -32,5 +32,3 @@ archives:
         builds:
         - test-utils
         name_template: "test-utils_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
-release:
-    name_template: "gomods-v{{.Version}}"
