@@ -33,4 +33,4 @@ archives:
         - test-utils
         name_template: "test-utils_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
 release:
-    name_template: "gomods-v{{.Version}}"
+    name_template: "go-ops-v{{.Version}}"
